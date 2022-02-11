@@ -1,4 +1,6 @@
-/dags
+
 /logs
 /main
 /plugins
+/venv
+/main
