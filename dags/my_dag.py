@@ -6,9 +6,9 @@ from random import randint
 
 def choose_best_model(ti):
     accuracies = ti.xcom_pull(task_ids=[
-        'training_Model_A',
-        'training_Model_B',
-        'training_Model_C',
+        'training_model_A',
+        'training_model_B',
+        'training_model_C',
     ])
     best_accuracy = max(accuracies)
     if best_accuracy > 8:
@@ -52,3 +52,5 @@ with DAG("my_dag", start_date=datetime(2022, 1, 1),
             task_id="inaccurate",
             bash_command="echo 'inaccurate'"
         )
+        
+        [training_model_A, training_model_B, training_model_C] >> choose_best_model >> [accurate, inaccurate]
