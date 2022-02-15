@@ -13,3 +13,23 @@ default_args = {
     'retries': 1, 
     'retry_delay': timedelta(minutes=1)
 }
+
+dag = DAG(
+    'spotify_dag',
+    default_args=default_args,
+    description='Our first DAG with ETL process!',
+    schedule_interval=timedelta(days=1)
+)
+
+run_etl=PythonOperator(
+    tas_id="whole_spotify_etl",
+    python_callable=,
+    dag=dag
+)
+
+
+def run_spotify_etl():
+    
+
+
+run_etl
