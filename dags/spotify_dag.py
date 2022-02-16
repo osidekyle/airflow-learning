@@ -20,7 +20,7 @@ dag = DAG(
     description='Our first DAG with ETL process!',
     schedule_interval=timedelta(days=1)
 )
-
+"""
 run_etl=PythonOperator(
     tas_id="whole_spotify_etl",
     python_callable=,
@@ -32,4 +32,4 @@ def run_spotify_etl():
     
 
 
-run_etl
+run_etl"""
