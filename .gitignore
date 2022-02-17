@@ -2,5 +2,8 @@
 /logs
 /main
 /plugins
-/venv
 /main
+/venv/include
+/venv/Lib
+/venv/scripts
+/venv/pyvenv.cfg
