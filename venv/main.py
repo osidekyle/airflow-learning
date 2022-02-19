@@ -8,9 +8,9 @@ from datetime import datetime
 import datetime
 import sqlite3
 
-DATABASE_LOCATION = "sqlite://my_played_tracks.sqlite"
+DATABASE_LOCATION = "sqlite:///my_played_tracks.sqlite"
 USER_ID = "osidekyle"
-TOKEN = "BQB-M5rv1FOU2sWFun9RlX5Jmg2YmEeyQbfy2i7I9k3wlHCvd5Oamybks78zmyGHfYqAISi5qxYm20iMd5myzFIfW3_ruTLaVeycP6qGkebHT1TJc3JUdwwQyjKTp7JBWFqKDc8PqbSM84SKa-8"
+TOKEN = "BQA0qSQwWoLfet2ZxHRomESvvdsm5DdacSduj1jAsYmJZ1pqS6zKZjQ0oRa4735wwfNRZOMjpWdnB6NKYo44MbpBowWgG4JW9hEIAhQM5ito3WzEvtiOQFKnlhyKZsc0cmaG5PQ6Z0GUffVKr8E"
 
 if __name__ == "__main__":
     headers = {
@@ -76,3 +76,27 @@ print(song_df)
 
 if check_if_valid_data(song_df):
     print("Valid!")
+
+engine = sqlalchemy.create_engine(DATABASE_LOCATION)
+conn = sqlite3.connect("my_played_tracks.sqlite")
+cursor = conn.cursor()
+
+sql_query = """
+CREATE TABLE IF NOT EXISTS my_played_tracks(
+    song_name VARCHAR(200),
+    artist_name VARCHAR(200),
+    played_at VARCHAR(200),
+    timestamp VARCHAR(200),
+    CONSTRAINT primary_key_constraint PRIMARY KEY (played_at)
+)
+"""
+
+cursor.execute(sql_query)
+print("Opened databases successfully")
+
+try: 
+    song_df.to_sql("my_played_tracks", engine, index=False, if_exists="append")
+except:
+    print("Data already in DB")
+
+conn.close()
